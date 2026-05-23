@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XELX | Premium Streetwear</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Reset & Variables */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        :root {
+            --bg-color: #0d0d0d;
+            --card-bg: #141414;
+            --accent-color: #ff3e3e;
+            --text-main: #ffffff;
+            --text-muted: #8c8c8c;
+            --border-color: #262626;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background-color: rgba(13, 13, 13, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--text-main);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            letter-spacing: 8px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .cta-btn {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 35px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            background-color: #e22626;
+        }
+
+        /* Products Section */
+        .catalog-container {
+            padding: 80px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 15px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 125px; /* 4:5 Aspect Ratio for uniform look */
+            overflow: hidden;
+            background-color: #222;
+        }
+
+        .product-card img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-category {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .product-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .add-to-cart-btn {
+            background: transparent;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            padding: 8px 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px 5%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Toast Notification for JS */
+        .toast {
+            position: fixed;
+            bottom: -50px;
+            right: 20px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 4px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            transition: bottom 0.3s ease-in-out;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            bottom: 20px;
+        }
+
+        /* Responsive Breakpoint */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 42px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">XELX<span>.</span></div>
+        <ul class="nav-links">
+            <li><a href="#shop">Shop All</a></li>
+            <li><a href="#shop">New Drops</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>DEFINE YOUR STREET</h1>
+        <p>Premium oversized drop shoulders, heavy-knit structures, and sharp silhouettes tailored for the modern explorer.</p>
+        <a href="#shop" class="cta-btn">Explore Collection</a>
+    </section>
+
+    <!-- Main Shop Section -->
+    <main class="catalog-container" id="shop">
+        <h2 class="section-title">Latest Arrivals</h2>
+        
+        <div class="product-grid">
+            
+            <!-- Item 1: Hoodie -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=600&q=80" alt="Cyberpunk Heavyweight Hoodie">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Outerwear</div>
+                    <div class="product-name">Cyberpunk Heavyweight Hoodie</div>
+                    <div class="product-bottom">
+                        <span class="product-price">₹2,499</span>
+                        <button class="add-to-cart-btn" onclick="showNotification('Hoodie added to cart!')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2: Baggy Pants -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=600&q=80" alt="Cargo Baggy Pants">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Bottoms</div>
+                    <div class="product-name">Loose Fit Cargo Baggy Pants</div>
+                    <div class="product-bottom">
+                        <span class="product-price">₹2,899</span>
+                        <button class="add-to-cart-btn" onclick="showNotification('Baggy Pants added to cart!')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3: Caps -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=600&q=80" alt="Distressed Streetwear Cap">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Accessories</div>
+                    <div class="product-name">Distressed Signature Cap</div>
+                    <div class="product-bottom">
+                        <span class="product-price">₹1,199</span>
+                        <button class="add-to-cart-btn" onclick="showNotification('Cap added to cart!')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4: Jackets -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80" alt="Urban Moto Bomber Jacket">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Outerwear</div>
+                    <div class="product-name">Urban Moto Bomber Jacket</div>
+                    <div class="product-bottom">
+                        <span class="product-price">₹2,999</span>
+                        <button class="add-to-cart-btn" onclick="showNotification('Jacket added to cart!')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 5: T-Shirts -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80" alt="Oversized Boxy Tee">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Tops</div>
+                    <div class="product-name">Oversized Heavyweight Tee</div>
+                    <div class="product-bottom">
+                        <span class="product-price">₹1,499</span>
+                        <button class="add-to-cart-btn" onclick="showNotification('T-Shirt added to cart!')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 XELX Clothing Co. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Notification Toast Popup -->
+    <div id="toast" class="toast">Item added to cart!</div>
+
+    <script>
+        function showNotification(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
