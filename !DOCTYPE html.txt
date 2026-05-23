@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bhondu ❤️ Momo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #fce2e6, #e8d9f1);
+  overflow-x: hidden;
+  color: #5a2a3c;
+}
+
+/* Floating hearts */
+.heart-float {
+  position: fixed;
+  bottom: -50px;
+  font-size: 20px;
+  animation: floatUp 8s linear infinite;
+  opacity: 0.6;
+}
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 0.8; }
+  100% { transform: translateY(-120vh); opacity: 0; }
+}
+
+.container {
+  max-width: 750px;
+  margin: auto;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.card {
+  background: rgba(255,255,255,0.6);
+  border-radius: 25px;
+  padding: 30px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+h1 {
+  font-size: 2.6em;
+}
+
+.message {
+  font-size: 1.1em;
+  line-height: 1.8;
+  margin-top: 15px;
+}
+
+button {
+  margin: 15px;
+  padding: 14px 26px;
+  font-size: 1.1em;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+.yes {
+  background: #ff8fab;
+  color: white;
+}
+
+.always {
+  background: #cdb4db;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Countdown */
+#countdown {
+  font-size: 1.2em;
+  margin-top: 20px;
+  color: #7a3c58;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Music -->
+<audio id="music" loop>
+  <source src="lovers-rock.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div id="page1" class="container">
+  <div class="card">
+    <h1>Momo 💕</h1>
+
+    <div class="message">
+      Every day with you feels like a gift. You've shown me the true meaning of love,
+      and I feel so lucky to have you in my life. Your presence makes everything better,
+      and your love fills my heart with happiness.<br><br>
+
+      I adore everything about you—from your beautiful smile to the way you make me laugh.
+      You are the best thing that's ever happened to me, and I can't imagine my life without you.<br><br>
+
+      This Valentine's Day, I want to remind you that you are my heart and my everything.
+      Thank you for being you and for loving me the way you do.
+    </div>
+
+    <div id="countdown"></div>
+
+    <h2>Will you be my Valentine? 🌹</h2>
+
+    <button class="yes" onclick="goNext()">Yes 💖</button>
+    <button class="always" onclick="goNext()">Always Yes 😂</button>
+  </div>
+</div>
+
+<!-- PAGE 2 (Hidden Proposal Page) -->
+<div id="page2" class="container hidden">
+  <div class="card">
+    <h1>Yayyy 💘</h1>
+    <p class="message">
+      No matter what the world throws at us,<br>
+      I choose you. Always.<br><br>
+      Thank you for being my safe place, my happiness,
+      and my greatest love 💕
+    </p>
+
+    <h2>Love, Bhondu 🥹❤️</h2>
+  </div>
+</div>
+
+<script>
+// Floating hearts generator
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart-float";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 20 + 15 + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 8000);
+}, 400);
+
+// Countdown timer (Feb 14)
+const targetDate = new Date("February 14, 2026 00:00:00").getTime();
+setInterval(() => {
+  const now = new Date().getTime();
+  const diff = targetDate - now;
+  if (diff > 0) {
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    document.getElementById("countdown").innerHTML =
+      `⏳ ${days} days left until Valentine’s Day`;
+  }
+}, 1000);
+
+// Page switch + music
+function goNext() {
+  document.getElementById("page1").style.display = "none";
+  document.getElementById("page2").style.display = "block";
+  document.getElementById("music").play();
+}
+</script>
+
+</body>
+</html>
